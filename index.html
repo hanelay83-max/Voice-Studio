@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efe7ff">
+  <title>မြန်မာ Voice Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-brand"><div class="sidebar-logo">✦</div><div><strong>မြန်မာ Voice Studio</strong><small>Personal local workspace</small></div></div>
+    <div class="sidebar-label" data-i18n-my="ဖန်တီးရန်" data-i18n-en="CREATE">ဖန်တီးရန်</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item active" data-view="voice"><span>🎙️</span><span data-i18n-my="Voice Studio" data-i18n-en="Voice Studio">Voice Studio</span></button>
+      <button class="sidebar-item" data-view="recap"><span>✦</span><span data-i18n-my="Recap" data-i18n-en="Recap">Recap</span><em>NEW</em></button>
+    </nav>
+    <div class="sidebar-label" data-i18n-my="ဒေသတွင်း" data-i18n-en="LOCAL">ဒေသတွင်း</div>
+    <button class="sidebar-item sidebar-muted" id="sidebar-history"><span>◷</span><span data-i18n-my="History" data-i18n-en="History">History</span></button>
+    <button class="sidebar-item sidebar-muted" id="sidebar-settings"><span>⚙</span><span data-i18n-my="Settings" data-i18n-en="Settings">Settings</span></button>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-local"><span>●</span><div><strong data-i18n-my="LOCAL MODE" data-i18n-en="LOCAL MODE">LOCAL MODE</strong><small data-i18n-my="တစ်ယောက်တည်းအသုံးပြုရန်" data-i18n-en="For personal use">တစ်ယောက်တည်းအသုံးပြုရန်</small></div></div>
+    <div class="language-switch" aria-label="Language switch"><button class="lang-btn active" data-lang="my">မြန်မာ</button><button class="lang-btn" data-lang="en">English</button></div>
+  </aside>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div><div class="ambient ambient-c"></div>
+  <header class="topbar"><div class="brand"><div class="profile-ring"><img src="profile.jpg" alt="Voice Studio profile"></div><div><h1>မြန်မာ <span>VOICE STUDIO</span></h1><p>AI Text-to-Speech & Voice Cloning</p></div></div><div class="local-pill">● LOCAL MODE</div></header>
+  <main class="layout">
+    <section class="card controls">
+      <div class="section-title"><span class="eyebrow">၁ / INPUT</span><h2>အသံဖန်တီးရန်</h2><p>စာထည့်ပြီး အသံပုံစံရွေးပါ</p></div>
+      <div class="tabs" role="tablist"><button class="tab active" data-mode="tts" role="tab">✍️ စာမှအသံ<span>Text to Speech</span></button><button class="tab" data-mode="clone" role="tab">🎙️ အသံပွားရန်<span>Voice Cloning</span></button></div>
+      <label class="field-label" for="text-input">ဖတ်မည့်စာသား <span id="char-count">0</span> စာလုံး</label>
+      <textarea id="text-input" rows="10" placeholder="ဥပမာ — မင်္ဂလာပါ။ ဒီနေ့ကောင်းသောနေ့လေး ဖြစ်ပါစေ..." required></textarea>
+      <div class="quick-row"><button type="button" class="sample" data-sample="မင်္ဂလာပါ။ မြန်မာ Voice Studio မှ ကြိုဆိုပါတယ်။ သင်ရေးသားထားသောစာကို သဘာဝကျသောအသံဖြင့် ဖန်တီးပေးနိုင်ပါတယ်။">နမူနာထည့်ရန်</button><button type="button" class="clear" id="clear-text">ရှင်းလင်းမည်</button></div>
+      <div class="provider-row"><label class="field-label" for="provider">AI Engine</label><select id="provider"><option value="auto">Auto — VoxCPM → OmniVoice fallback</option><option value="voxcpm">VoxCPM2 — quality / style</option><option value="omnivoice">OmniVoice — 600+ languages / cloning</option></select><small class="muted">စာသားရှည်ရင် အလိုအလျောက် အပိုင်းခွဲပြီး အသံတွေကို ပြန်ပေါင်းပေးမည်</small></div>
+      <div id="tts-options">
+        <label class="field-label" for="style-input">အသံပုံစံဖော်ပြချက်</label>
+        <input id="style-input" type="text" placeholder="နွေးထွေးသော မြန်မာအမျိုးသားအသံ၊ ဖြည်းဖြည်းပြောပါ">
+        <div class="chips"><button type="button" class="chip" data-style="နွေးထွေးသော မြန်မာအမျိုးသားအသံ၊ ရှင်းရှင်းလင်းလင်းပြောပါ">နွေးထွေး</button><button type="button" class="chip" data-style="မြန်မာအမျိုးသမီးအသံ၊ နူးညံ့ပြီး သဘာဝကျပါစေ">နူးညံ့</button><button type="button" class="chip" data-style="ကြေညာသူအသံ၊ ယုံကြည်မှုရှိပြီး တက်ကြွပါစေ">ကြေညာသူ</button><button type="button" class="chip" data-style="ဖြည်းဖြည်းနှင့် သက်တောင့်သက်သာ ပြောပါ">သက်တောင့်သက်သာ</button></div>
+      </div>
+      <div id="clone-options" hidden>
+        <label class="field-label">Reference အသံဖိုင်</label>
+        <label class="dropzone" id="dropzone"><input id="audio-input" type="file" accept="audio/*"><span class="upload-icon">↑</span><strong id="file-title">အသံဖိုင်ရွေးပါ သို့မဟုတ် ဆွဲချပါ</strong><small id="file-meta">WAV, MP3, OGG • 20MB အထိ</small></label>
+        <button type="button" class="remove-file" id="remove-file" hidden>ဖိုင်ဖယ်ရှားမည်</button>
+        <label class="check"><input id="denoise" type="checkbox" checked> Reference အသံ noise လျှော့မည်</label>
+      </div>
+      <div class="advanced"><div class="advanced-head"><span>အဆင့်မြင့်ရွေးချယ်စရာ</span><button type="button" id="toggle-advanced">ဖွင့်မည်</button></div><div id="advanced-body" hidden><label class="range-label">Creativity <output id="cfg-value">2.0</output></label><input id="cfg" type="range" min="1" max="3" step="0.1" value="2"><label class="check"><input id="normalize" type="checkbox" checked> စာလုံး၊ နံပါတ်များကို ပုံမှန်ဖတ်မည်</label></div></div>
+      <button class="generate" id="generate" type="button"><span id="generate-label">အသံဖန်တီးမည်</span><span id="spinner" hidden class="spinner"></span></button>
+      <div id="status" class="status" aria-live="polite">စတင်အသုံးပြုရန် စာသားထည့်ပါ</div><div id="progress-wrap" class="progress-wrap" hidden><div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div><div id="progress-text" class="progress-text"></div></div>
+    </section>
+    <section class="card preview">
+      <div class="preview-head"><div><span class="eyebrow">၂ / OUTPUT</span><h2>ထွက်ရှိလာသောအသံ</h2></div><button id="download" class="download" disabled>↓ Download</button></div>
+      <div id="empty" class="empty"><div class="sound-icon">◖)))</div><h3>အသံမရှိသေးပါ</h3><p>စာသားထည့်ပြီး “အသံဖန်တီးမည်” ကိုနှိပ်ပါ</p></div>
+      <div id="result" hidden><div class="result-badge">✓ ဖန်တီးပြီးပါပြီ</div><audio id="audio-player" controls></audio><div class="meta"><span id="mode-meta">—</span><span id="duration-meta">—</span><span id="size-meta">—</span></div><div class="wave" id="wave"></div></div>
+      <div class="how"><h3>အသုံးပြုပုံ</h3><div class="steps"><div><b>၁</b><span>စာသားရေးပါ</span></div><div><b>၂</b><span>အသံပုံစံရွေးပါ</span></div><div><b>၃</b><span>ဖန်တီးပြီး download လုပ်ပါ</span></div></div></div>
+      <div class="privacy">🔒 သင့်စာသားနှင့်အသံဖိုင်ကို ကိုယ်ပိုင် server မသိမ်းပါ။ အသံဖန်တီးချိန်တွင် Hugging Face VoxCPM demo သို့သာ ပို့ပါသည်။</div>
+    </section>
+  </main>
+
+  <section class="recap-view" id="recap-view" hidden>
+    <div class="recap-topline"><div><span class="eyebrow">02 / RECAP</span><h2 data-i18n-my="အကြောင်းအရာရှည်များကို အဓိကအချက်များအဖြစ်ပြောင်းပါ" data-i18n-en="Turn long content into clear next steps.">အကြောင်းအရာရှည်များကို အဓိကအချက်များအဖြစ်ပြောင်းပါ</h2><p data-i18n-my="Transcript ထည့်ပြီး summary၊ key points နဲ့ action items ထုတ်ယူပါ။" data-i18n-en="Add a transcript and extract a summary, key points, and action items.">Transcript ထည့်ပြီး summary၊ key points နဲ့ action items ထုတ်ယူပါ။</p></div><span class="recap-private">● Local & private</span></div>
+    <div class="recap-grid">
+      <section class="recap-card recap-input-card"><div class="recap-tabs"><button class="recap-tab active" data-recap-tab="paste">▤ <span data-i18n-my="Transcript ထည့်ရန်" data-i18n-en="Add transcript">Transcript ထည့်ရန်</span></button><button class="recap-tab" data-recap-tab="upload">↑ <span data-i18n-my="File တင်ရန်" data-i18n-en="Upload file">File တင်ရန်</span></button></div><label class="recap-label" data-i18n-my="Source URL (ရွေးချယ်နိုင်သည်)" data-i18n-en="Source URL (optional)">Source URL (ရွေးချယ်နိုင်သည်)</label><input id="recap-source" class="recap-control" placeholder="YouTube / podcast / meeting URL" /><label class="recap-label" data-i18n-my="Transcript စာသား" data-i18n-en="Transcript text">Transcript စာသား</label><textarea id="recap-text" class="recap-control recap-textarea" placeholder="Transcript ကို paste လုပ်ပါ..." data-placeholder-my="Transcript ကို paste လုပ်ပါ..." data-placeholder-en="Paste your transcript here..."></textarea><input id="recap-file" type="file" accept=".txt,.md,.srt,.vtt" hidden><div class="recap-input-footer"><span id="recap-count">0 words</span><button id="recap-demo" class="recap-link">✦ <span data-i18n-my="Demo ထည့်ရန်" data-i18n-en="Use demo">Demo ထည့်ရန်</span></button></div><button id="recap-generate" class="recap-generate">✦ <span data-i18n-my="Recap ပြုလုပ်မည်" data-i18n-en="Generate recap">Recap ပြုလုပ်မည်</span> →</button><div id="recap-status" class="recap-status"></div></section>
+      <section class="recap-card recap-output-card"><div class="recap-output-head"><div><span class="eyebrow">OUTPUT</span><h3 data-i18n-my="သင့်ရဲ့ Recap" data-i18n-en="Your recap">သင့်ရဲ့ Recap</h3></div><div class="recap-output-actions"><button id="recap-copy" class="recap-outline" disabled>Copy</button><button id="recap-download" class="recap-outline" disabled>↓ Export</button></div></div><div class="recap-segment"><button class="recap-segment-btn active" data-output-tab="recap">Recap</button><button class="recap-segment-btn" data-output-tab="transcript">Transcript</button></div><div id="recap-result" class="recap-result"><div class="recap-empty"><div>✦</div><h4 data-i18n-my="Transcript တစ်ခုနဲ့ စတင်ပါ" data-i18n-en="Start with a transcript">Transcript တစ်ခုနဲ့ စတင်ပါ</h4><p data-i18n-my="အပေါ်က box ထဲမှာ စာသားထည့်ပြီး Recap ပြုလုပ်မည်ကို နှိပ်ပါ။" data-i18n-en="Add text above, then click Generate recap.">အပေါ်က box ထဲမှာ စာသားထည့်ပြီး Recap ပြုလုပ်မည်ကို နှိပ်ပါ။</p></div></div></section>
+      <aside class="recap-card recap-options"><div class="eyebrow">RECAP OPTIONS</div><h3 data-i18n-my="Output ကိုချိန်ညှိရန်" data-i18n-en="Fine tune your output">Output ကိုချိန်ညှိရန်</h3><label class="recap-label" data-i18n-my="Output language" data-i18n-en="Output language">Output language</label><select id="recap-language" class="recap-control"><option value="my">မြန်မာ</option><option value="en">English</option></select><label class="recap-label" data-i18n-my="Recap style" data-i18n-en="Recap style">Recap style</label><div class="recap-choice"><button class="selected" data-style="brief"><b>Brief</b><small>3–4 points</small></button><button data-style="detailed"><b>Detailed</b><small>More context</small></button></div><label class="recap-label" data-i18n-my="Include in recap" data-i18n-en="Include in recap">Include in recap</label><label class="recap-check"><input id="include-points" type="checkbox" checked> <span data-i18n-my="အဓိကအချက်များ" data-i18n-en="Key points">အဓိကအချက်များ</span></label><label class="recap-check"><input id="include-actions" type="checkbox" checked> <span data-i18n-my="လုပ်ဆောင်ရန်" data-i18n-en="Action items">လုပ်ဆောင်ရန်</span></label><label class="recap-check"><input id="include-decisions" type="checkbox" checked> <span data-i18n-my="ဆုံးဖြတ်ချက်များ" data-i18n-en="Decisions">ဆုံးဖြတ်ချက်များ</span></label><div class="recap-tip">💡 <span data-i18n-my="Speaker name၊ deadline နဲ့ decision တွေပါတဲ့ transcript က ပိုကောင်းတဲ့ output ရပါတယ်။" data-i18n-en="Transcripts with names, deadlines, and decisions produce better output.">Speaker name၊ deadline နဲ့ decision တွေပါတဲ့ transcript က ပိုကောင်းတဲ့ output ရပါတယ်။</span></div></aside>
+    </div>
+  </section>
+  <section class="card history"><div class="history-head"><div><span class="eyebrow">LOCAL HISTORY</span><h2>နောက်ဆုံးဖန်တီးထားသည်များ</h2></div><button id="clear-history">မှတ်တမ်းရှင်းမည်</button></div><div id="history-list" class="history-list"><p class="muted">ဒီ browser ထဲမှာသာ မှတ်တမ်းတင်ထားပါမည်။</p></div></section>
+  <footer>မြန်မာ Voice Studio • Personal use • Powered by VoxCPM<br><strong class="rgb-credit">Create by HPA</strong></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
